@@ -1,0 +1,25 @@
+# values.yaml
+
+# Configurações para o Deployment
+deployment:
+  name: nginx
+  replicaCount: 1
+  image:
+    repository: nginx
+    tag: stable
+    pullPolicy: IfNotPresent
+
+# Configurações para o Service
+service:
+  name: nginx-svc
+  type: ClusterIP
+  port: 80
+
+# Configurações para o Ingress
+ingress:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: / # Quando um usuário acessar http://seu-domínio.com/, a solicitação será roteada para o serviço que responde em /app
+  ingressClassName: nginx
+  hosts:
+    - host: nginx.127.0.0.1.nip.io  # Definido como uma lista de hosts
